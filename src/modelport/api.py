@@ -671,7 +671,7 @@ def create_app(data_dir: Path | str | None = None, *, start_worker: bool = True)
         app.mount("/", StaticFiles(directory=frontend, html=True), name="dashboard")
     else:
 
-        @app.get("/", response_class=HTMLResponse)
+        @app.get("/", response_class=HTMLResponse, include_in_schema=False)
         def dashboard_missing():
             return (
                 "<h1>ModelPort</h1><p>Build the dashboard with npm ci &amp;&amp; npm run "

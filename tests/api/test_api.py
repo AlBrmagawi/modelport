@@ -172,3 +172,21 @@ def test_idempotency_conflicts(api_client):
         "/api/v1/fixtures", json={"architecture": "dual-input"}, headers={"Idempotency-Key": "one"}
     )
     assert b.status_code == 409 and b.json()["code"] == "IDEMPOTENCY_CONFLICT"
+
+
+def test_openapi_is_identical_before_and_after_dashboard_build(tmp_path, monkeypatch):
+    frontend = tmp_path / "dashboard"
+    monkeypatch.setenv("MODELPORT_WEB_DIR", str(frontend))
+    schemas = []
+    for built in (False, True):
+        if built:
+            frontend.mkdir()
+            (frontend / "index.html").write_text("<h1>Test dashboard</h1>", encoding="utf-8")
+        app = create_app(tmp_path / f"data-{built}", start_worker=False)
+        with TestClient(app) as client:
+            response = client.get("/")
+            assert response.status_code == 200
+            assert ("Test dashboard" if built else "Build the dashboard") in response.text
+            schemas.append(client.get("/openapi.json").json())
+    assert schemas[0] == schemas[1]
+    assert "/" not in schemas[0]["paths"]

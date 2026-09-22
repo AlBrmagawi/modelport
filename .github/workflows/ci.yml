@@ -5,6 +5,7 @@ permissions:
 jobs:
   cpu:
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
@@ -57,6 +58,7 @@ jobs:
         if: always()
         with:
           name: evidence-${{ matrix.os }}
+          include-hidden-files: true
           path: |
             .tools/*audit.json
             .tools/pytest.xml

@@ -23,6 +23,7 @@ identify downloadable releases; the source currently reports version 0.1.0.
 - Preserved NPZ tensor names that overlap NumPy keyword names.
 - Verified worker cleanup on Windows and Linux.
 - Returned HTTP 401 for malformed non-ASCII bearer credentials.
+- Kept OpenAPI identical before and after building the optional dashboard assets.
 - Added source/wheel integrity checks and exclusions for local credentials and data.
 
 ### Scope
