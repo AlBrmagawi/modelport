@@ -1,0 +1,9 @@
+{
+  "repository": "hf-internal-testing/tiny-random-BertModel",
+  "revision": "fc08ad9cc33be9aef4f55cc80e16ef5ae3d5981c",
+  "files": [{
+    "path": "onnx/model.onnx",
+    "destination": "model.onnx",
+    "sha256": "ebc3af0117e7fcc734a5c8b951d8b711dda1e21baaa3052daeddfbc15401bc77"
+  }]
+}

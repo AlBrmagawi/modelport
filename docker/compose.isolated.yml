@@ -1,0 +1,28 @@
+# Optional diagnostic runner, not a replacement for the durable supervisor.
+# Prepare request.json using the runner protocol described in deployment.md.
+services:
+  native:
+    image: modelport:${MODELPORT_VERSION:-0.1.0}
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - "cp /job/request.json /work/request.json && cd /work && python -m modelport.runner && cp /work/result.json /results/result.json && if [ -d /work/candidate ]; then cp -r /work/candidate /results/candidate; fi"
+    network_mode: none
+    init: true
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 4g
+    cpus: 2
+    pids_limit: 64
+    tmpfs:
+      - /tmp:size=128m,mode=1777
+      - /work:size=512m,mode=1777
+    volumes:
+      - ${MODELPORT_CONTAINER_INPUTS:-../.modelport/blobs}:/inputs:ro
+      - ${MODELPORT_CONTAINER_REQUEST:-../container-job/request.json}:/job/request.json:ro
+      - ${MODELPORT_CONTAINER_RESULTS:-../container-job/results}:/results
+    healthcheck:
+      disable: true

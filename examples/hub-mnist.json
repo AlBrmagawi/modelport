@@ -1,0 +1,9 @@
+{
+  "repository": "onnxmodelzoo/mnist-8",
+  "revision": "a19f9a8c2333de1df9b03f10f5739f468b699a1a",
+  "files": [{
+    "path": "mnist-8.onnx",
+    "destination": "model.onnx",
+    "sha256": "2f06e72de813a8635c9bc0397ac447a601bdbfa7df4bebc278723b958831c9bf"
+  }]
+}

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Installation and troubleshooting
+    url: https://github.com/AlBrmagawi/modelport/blob/main/docs/getting-started.md
+    about: Start here for dependency downloads, Docker and source setup.
+  - name: Security policy
+    url: https://github.com/AlBrmagawi/modelport/security/policy
+    about: Read the security boundary and vulnerability-reporting instructions.

@@ -1,0 +1,90 @@
+name: modelport-cpu
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  cpu:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.12.17"
+          enable-cache: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: uv sync --locked --extra cpu
+      - run: uv run --no-sync ruff check src tests scripts examples hatch_build.py
+      - run: uv run --no-sync ruff format --check src tests scripts examples hatch_build.py
+      - run: uv run --no-sync mypy src/modelport
+      - run: uv run --no-sync pytest --junitxml=.tools/pytest.xml
+      - run: uv run --no-sync modelport demo --output demo-results
+      - run: uv run --no-sync python scripts/schema.py --check
+      - run: npm ci
+        working-directory: web
+      - run: npm run schema
+        working-directory: web
+      - run: npx prettier --write src/schema.d.ts
+        working-directory: web
+      - run: git diff --exit-code -- web/src/schema.d.ts
+      - run: npm test
+        working-directory: web
+      - run: npm run build
+        working-directory: web
+      - run: npx prettier --check src tests scripts playwright.config.ts vite.config.ts
+        working-directory: web
+      - run: npx playwright install --with-deps chromium
+        working-directory: web
+      - run: npm run e2e
+        working-directory: web
+      - run: uv run --no-sync python scripts/audit.py
+      - run: npm audit --audit-level=low
+        working-directory: web
+      - run: uv run --no-sync python scripts/release.py --skip-frontend
+      - run: uv run --no-sync python scripts/verify_release.py
+      - name: Install and exercise the built wheel
+        run: |
+          uv pip install --no-deps --reinstall release/0.1.0/modelport-0.1.0-py3-none-any.whl
+          uv run --no-sync python scripts/verify_wheel.py --work-dir .tools/wheel-smoke
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: evidence-${{ matrix.os }}
+          path: |
+            .tools/*audit.json
+            .tools/pytest.xml
+            .tools/release-verification.json
+            demo-results/*.json
+            demo-results/*.html
+            web/test-results/
+            release/0.1.0/
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Gitleaks directory scan
+        run: |
+          curl -fsSL https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz -o /tmp/gitleaks.tgz
+          printf '%s  %s\n' '551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb' /tmp/gitleaks.tgz | sha256sum --check --strict
+          tar -xzf /tmp/gitleaks.tgz -C /tmp gitleaks
+          /tmp/gitleaks dir . --redact --no-banner --no-color
+          /tmp/gitleaks git . --redact --no-banner --no-color
+  container:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -f docker/Dockerfile -t modelport-ci .
+      - name: Isolated CPU smoke
+        run: docker run --rm --init --no-healthcheck --network=none --read-only --tmpfs /tmp:size=256m --cap-drop ALL --security-opt no-new-privileges --memory=6g --cpus=2 --pids-limit=128 modelport-ci modelport demo --output /data/demo
+      - run: docker build -f docker/Dockerfile --target test -t modelport-tests .
+      - run: docker run --rm --init --network=none --memory=6g --cpus=2 --pids-limit=128 modelport-tests

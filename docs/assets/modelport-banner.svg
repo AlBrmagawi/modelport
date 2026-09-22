@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="320" viewBox="0 0 1280 320" role="img" aria-labelledby="title description">
+  <title id="title">ModelPort</title>
+  <desc id="description">Convert. Validate. Benchmark. A local CPU workspace for PyTorch, ONNX and ONNX Runtime.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#102437"/>
+      <stop offset="1" stop-color="#1c435b"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#a5d6e7" stroke-opacity=".07"/>
+    </pattern>
+  </defs>
+  <rect width="1280" height="320" rx="20" fill="url(#background)"/>
+  <rect width="1280" height="320" rx="20" fill="url(#grid)"/>
+  <g fill="#83c9ee">
+    <path d="M64 108l18-6v59l-18 6z"/>
+    <path d="M90 88l18-6v79l-18 6z"/>
+    <path d="M116 101l18-6v52l-18 6z"/>
+  </g>
+  <text x="158" y="143" fill="#ffffff" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="65" font-weight="700" letter-spacing="-2">ModelPort</text>
+  <text x="64" y="212" fill="#ffffff" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="30" font-weight="500">Convert. Validate. Benchmark.</text>
+  <text x="64" y="255" fill="#b3cedd" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="18">From source model to measured result — in your local workspace.</text>
+  <g font-family="Inter,Segoe UI,Arial,sans-serif" font-size="16" text-anchor="middle">
+    <rect x="995" y="66" width="220" height="42" rx="21" fill="#2c6074"/>
+    <text x="1105" y="93" fill="#d8f5f0">CPU / LOCAL</text>
+    <text x="1105" y="169" fill="#cce6f3">PyTorch</text>
+    <text x="1105" y="206" fill="#cce6f3">ONNX</text>
+    <text x="1105" y="243" fill="#cce6f3">ONNX Runtime</text>
+  </g>
+</svg>

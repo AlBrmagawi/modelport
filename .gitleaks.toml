@@ -1,0 +1,17 @@
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Generated local environments, model evidence, and explicitly public test credential"
+paths = [
+  '''(^|[\\/])\.venv[\\/]''',
+  '''(^|[\\/])\.tools[\\/]''',
+  '''(^|[\\/])\.modelport[\\/]''',
+  '''(^|[\\/])demo(-dual)?-results[\\/]''',
+  '''(^|[\\/])node_modules[\\/]''',
+  '''(^|[\\/])dist[\\/]''',
+  '''(^|[\\/])test-results[\\/]''',
+  '''(^|[\\/])__pycache__[\\/]''',
+  '''(^|[\\/])\.(mypy|pytest|ruff)_cache[\\/]''',
+]
+regexes = ['''browser-test-only-operator-credential''', '''^YOUR_OPERATOR_TOKEN$''']
