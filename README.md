@@ -1,25 +1,13 @@
-<p align="center">
-  <img src="docs/assets/modelport-banner.svg" alt="ModelPort — Convert. Validate. Benchmark." width="100%">
-</p>
+<picture>
+  <source media="(max-width: 480px)" srcset="docs/assets/modelport-banner-mobile.svg">
+  <img src="docs/assets/modelport-banner.svg" alt="ModelPort — convert, validate and benchmark models on your CPU" width="100%">
+</picture>
 
-<p align="center">
-  <a href="https://github.com/AlBrmagawi/modelport/actions/workflows/ci.yml"><img src="https://github.com/AlBrmagawi/modelport/actions/workflows/ci.yml/badge.svg?branch=main" alt="CPU checks"></a>
-  <a href="docs/getting-started.md"><img src="https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white" alt="Python 3.12"></a>
-  <a href="docs/capability-matrix.md"><img src="https://img.shields.io/badge/Runtime-CPU%20%2F%20local-087F8C" alt="Local CPU runtime"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-163047" alt="Apache 2.0 license"></a>
-</p>
+# ModelPort
 
-<p align="center">
-  <strong>A local workspace for converting AI models and checking whether the result is worth deploying.</strong>
-</p>
+**A local workspace for converting AI models and checking the result before deployment.**
 
-<p align="center">
-  <a href="#quickstart">Quickstart</a> ·
-  <a href="docs/getting-started.md">Installation guide</a> ·
-  <a href="docs/README.md">Documentation</a> ·
-  <a href="https://github.com/AlBrmagawi/modelport/archive/refs/heads/main.zip">Download source</a> ·
-  <a href="CONTRIBUTING.md">Contribute</a>
-</p>
+[Quickstart](#quickstart) · [Installation](docs/getting-started.md) · [Documentation](docs/README.md) · [CI checks](https://github.com/AlBrmagawi/modelport/actions/workflows/ci.yml)
 
 ModelPort brings **PyTorch, ONNX and ONNX Runtime** into one workflow: import a
 supported model, create optimized variants, compare their outputs with the original,
@@ -29,7 +17,14 @@ authenticated REST API. Models and reports stay in your local workspace.
 **Status:** 0.1.0 CPU beta. Windows x64 and Linux x64 are the verified platforms.
 The demo generates its own small model and needs no pretrained-model download.
 
-![ModelPort dashboard showing real model inspection and validation](docs/screenshots/library.png)
+<details>
+<summary>View the workspace: model inspection and validation</summary>
+
+![ModelPort model library with PyTorch and ONNX artifacts, tensor signatures and validation status](docs/screenshots/library.png)
+
+Existing application capture. See the [reproducible CPU demo](docs/demo.md) to generate your own models and reports.
+
+</details>
 
 ## Why ModelPort?
 
@@ -191,7 +186,7 @@ See the [pre-push report](docs/pre-push-review.md) for scope and evidence.
 
 GitHub Actions runs Python checks on Windows and Ubuntu, frontend and browser
 tests, dependency audits, secret scans, package checks and Linux Docker tests.
-The badge above shows its current status.
+[View the current CI results](https://github.com/AlBrmagawi/modelport/actions/workflows/ci.yml).
 
 ```sh
 uv run --no-sync python scripts/check.py
