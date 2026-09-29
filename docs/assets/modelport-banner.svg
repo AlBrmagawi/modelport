@@ -1,30 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="320" viewBox="0 0 1280 320" role="img" aria-labelledby="title description">
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="224" viewBox="0 0 960 224" role="img" aria-labelledby="title desc">
   <title id="title">ModelPort</title>
-  <desc id="description">Convert. Validate. Benchmark. A local CPU workspace for PyTorch, ONNX and ONNX Runtime.</desc>
-  <defs>
-    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#102437"/>
-      <stop offset="1" stop-color="#1c435b"/>
-    </linearGradient>
-    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M40 0H0V40" fill="none" stroke="#a5d6e7" stroke-opacity=".07"/>
-    </pattern>
-  </defs>
-  <rect width="1280" height="320" rx="20" fill="url(#background)"/>
-  <rect width="1280" height="320" rx="20" fill="url(#grid)"/>
-  <g fill="#83c9ee">
-    <path d="M64 108l18-6v59l-18 6z"/>
-    <path d="M90 88l18-6v79l-18 6z"/>
-    <path d="M116 101l18-6v52l-18 6z"/>
-  </g>
-  <text x="158" y="143" fill="#ffffff" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="65" font-weight="700" letter-spacing="-2">ModelPort</text>
-  <text x="64" y="212" fill="#ffffff" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="30" font-weight="500">Convert. Validate. Benchmark.</text>
-  <text x="64" y="255" fill="#b3cedd" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="18">From source model to measured result — in your local workspace.</text>
-  <g font-family="Inter,Segoe UI,Arial,sans-serif" font-size="16" text-anchor="middle">
-    <rect x="995" y="66" width="220" height="42" rx="21" fill="#2c6074"/>
-    <text x="1105" y="93" fill="#d8f5f0">CPU / LOCAL</text>
-    <text x="1105" y="169" fill="#cce6f3">PyTorch</text>
-    <text x="1105" y="206" fill="#cce6f3">ONNX</text>
-    <text x="1105" y="243" fill="#cce6f3">ONNX Runtime</text>
-  </g>
+  <desc id="desc">Convert. Validate. Benchmark on your CPU.</desc>
+  <rect x="1" y="1" width="958" height="222" rx="14" fill="#191f24" stroke="#64757b" stroke-width="2"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif"><text x="40" y="45" font-size="14" fill="#87cec4" letter-spacing="2">SELECTED WORK / ALBRMAGAWI</text><text x="40" y="114" font-size="57" fill="#f2f5f5" font-weight="650" letter-spacing="-1.7">ModelPort</text><text x="40" y="164" font-size="24" fill="#c4ced0" >Convert. Validate. Benchmark on your CPU.</text><path d="M40 198h80" stroke="#87cec4" stroke-width="3"/><g fill="none" stroke="#87cec4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M752 69l52 43-52 43M724 112h80M804 112h28"/>
+      <circle cx="744" cy="62" r="10" fill="#191f24"/><circle cx="712" cy="112" r="10" fill="#191f24"/><circle cx="744" cy="162" r="10" fill="#191f24"/>
+      <rect x="835" y="82" width="60" height="60" rx="10"/><path d="M850 113l10 10 21-23"/>
+    </g></g>
 </svg>
